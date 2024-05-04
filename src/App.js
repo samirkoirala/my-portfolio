@@ -124,14 +124,14 @@ const App = () => {
 
       <div className="about-section">
         <h2>About Me</h2>
-        <p>
+        <p className="textkostyle">
           I describe myself as an enthusiastic, self-motivated and flexible
           person. I love doing team works and always ready to explore new
           things.
         </p>
       </div>
 
-      <a className="dnwld button-72" href="./mycv.pdf" download="cv.pdf">
+      <a className="dnwld button-72" href="myCV.docx" download="cv.docx">
         Download CV
       </a>
     </div>
