@@ -22,7 +22,25 @@ const App = () => {
   }, []);
 
   return (
-    <div>
+    <div className="parent">
+      <dotlottie-player
+        src="https://lottie.host/36c5b84e-5ccc-4248-b6e5-a0ec0f2e3154/11bOhywvxF.json"
+        background="#FFFFFF"
+        speed="1"
+        style={{
+          width: "300px",
+          height: "300px",
+          backgroundColor: "transparent",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+        direction="1"
+        playMode="normal"
+        loop
+        autoplay
+      ></dotlottie-player>
+
       <div className="app">
         <motion.h1
           className={`animated-text ${showAnimation ? "fade-in" : ""}`}
@@ -113,7 +131,7 @@ const App = () => {
         </p>
       </div>
 
-      <a href="./mycv.pdf" download="cv.pdf">
+      <a className="dnwld button-72" href="./mycv.pdf" download="cv.pdf">
         Download CV
       </a>
     </div>
