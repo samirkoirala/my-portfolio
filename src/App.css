@@ -64,4 +64,12 @@ body{
 .textkostyle{
   font-size: 21px;
 }
-
+.construction-animation{
+  text-align: center;
+}
+.app{
+  flex-direction: column;
+  justify-content: center ;
+  align-items: center;
+  text-align:center;
+}
