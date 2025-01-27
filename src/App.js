@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Home, FolderGit2, Mail } from 'lucide-react';
+
 import "./App.css";
 
 const App = () => {
@@ -39,9 +41,9 @@ const App = () => {
           <h1 className="title">Samir Koirala</h1>
           <nav>
             <ul className="nav">
-              <li><a href="#about">About</a></li>
-              <li><a href="#projects">Projects</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li><a href="#about"><Home size={8} /> About</a></li>
+              <li><a href="#projects"><FolderGit2 size={8} /> Projects</a></li>
+              <li><a href="#contact"><Mail size={16} /> Contact</a></li>
             </ul>
           </nav>
         </div>
@@ -61,18 +63,18 @@ const App = () => {
             <div className="project-card">
               <h3>GoAPI CI/CD Pipeline</h3>
               <p>
-                Implemented a complete CI/CD pipeline for a Go backend application using GitHub Actions and Helm charts, with deployment automated via ArgoCD.
+              Developed a RESTful API in Go for efficient data processing and backend services. Automated CI/CD with GitHub Actions, Helm, and ArgoCD for seamless deployment in a Kubernetes (k3s) cluster. Achieved a 50% reduction in deployment time with a scalable pipeline.
               </p>
               <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Repo" />
-              <a href="https://github.com/samirkoirala/go-api">View Repository</a>
+              <a href="https://github.com/samirkoirala/go-api"><button>View Repository</button></a>
             </div>
             <div className="project-card">
-              <h3>Kubernetes Deployment with k3s</h3>
+              <h3>Blog App using Django</h3>
               <p>
-                Designed and deployed a backend and database setup using k3s, leveraging namespace isolation and efficient resource utilization.
+              Created a simple blog application using Django for easy content management and user interaction. Implemented features like post creation, editing, and commenting for an engaging user experience. Leveraged Django's built-in admin panel for efficient administration and management of blog content.
               </p>
               <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Repo" />
-              <a href="https://github.com/samirkoirala/go-api">View Repository</a>
+              <a href="https://github.com/samirkoirala/Django-Blog"><button>View Repository</button></a>
             </div>
           </div>
         </section>
