@@ -193,6 +193,7 @@ body::before {
     padding: 1.5rem;
     transition: all 0.3s ease;
     margin-bottom: 1rem;
+    background-color: #000;
 }
 
 .project-card:hover {
