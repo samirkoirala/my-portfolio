@@ -1,139 +1,119 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faLinkedin,
-  faFacebook,
-  faTwitter,
-  faInstagram,
-} from "@fortawesome/free-brands-svg-icons";
+import React, { useState } from "react";
 import "./App.css";
-// import pdf from "../public/mycv.pdf";s
 
 const App = () => {
-  const [showAnimation, setShowAnimation] = useState(false);
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [submitted, setSubmitted] = useState(false);
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setShowAnimation(true);
-    }, 2000);
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
+  };
 
-    return () => clearTimeout(timeout);
-  }, []);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await fetch("https://formspree.io/f/xqaepeod", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
+      });
+      setSubmitted(true);
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      console.error("Error submitting form: ", error);
+    }
+  };
 
   return (
-    <div className="parent">
-      <dotlottie-player
-        src="https://lottie.host/36c5b84e-5ccc-4248-b6e5-a0ec0f2e3154/11bOhywvxF.json"
-        background="#FFFFFF"
-        speed="1"
-        style={{
-          width: "300px",
-          height: "300px",
-          backgroundColor: "transparent",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-        direction="1"
-        playMode="normal"
-        loop
-        autoplay
-      ></dotlottie-player>
+    <div className="app">
+      <header className="header">
+        <div className="container header-container">
+          <h1 className="title">Samir Koirala</h1>
+          <nav>
+            <ul className="nav">
+              <li><a href="#about">About</a></li>
+              <li><a href="#projects">Projects</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
 
-      <div className="app">
-        <motion.h1
-          className={`animated-text ${showAnimation ? "fade-in" : ""}`}
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.8 }}
-        >
-          Samir Koirala
-        </motion.h1>
-        {showAnimation && (
-          <div className="construction-animation">
-            <motion.div
-              className="animation-box"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 1, delay: 0.5 }}
-            />
-            <motion.h1
-              className={`animated-text ${showAnimation ? "fade-in" : ""}`}
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.8 }}
-            >
-              Portfolio Under construction
-            </motion.h1>
-            {showAnimation && (
-              <div className="construction-animation">
-                <motion.div
-                  className="animation-box"
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 1, delay: 0.5 }}
-                />
-              </div>
-            )}
+      <main className="container main">
+        <section id="about" className="section about">
+          <h2>About Me</h2>
+          <p>
+            Hi, I am Samir Koirala, a DevOps Engineer passionate about building robust, scalable, and automated infrastructures. I have hands-on experience in containerization, cloud deployment, and CI/CD pipelines. My goal is to streamline development workflows and optimize system performance.
+          </p>
+        </section>
+
+        <section id="projects" className="section projects">
+          <h2>Projects</h2>
+          <div className="project-grid">
+            <div className="project-card">
+              <h3>GoAPI CI/CD Pipeline</h3>
+              <p>
+                Implemented a complete CI/CD pipeline for a Go backend application using GitHub Actions and Helm charts, with deployment automated via ArgoCD.
+              </p>
+              <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Repo" />
+              <a href="https://github.com/samirkoirala/go-api">View Repository</a>
+            </div>
+            <div className="project-card">
+              <h3>Kubernetes Deployment with k3s</h3>
+              <p>
+                Designed and deployed a backend and database setup using k3s, leveraging namespace isolation and efficient resource utilization.
+              </p>
+              <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Repo" />
+              <a href="https://github.com/samirkoirala/go-api">View Repository</a>
+            </div>
           </div>
-        )}
-      </div>
-      <div className="social-links">
-        <a
-          href="https://www.linkedin.com/in/samirkoirala"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FontAwesomeIcon
-            icon={faLinkedin}
-            className="social-icon linkedin-icon"
-          />
-        </a>
-        <a
-          href="https://www.facebook.com/samirk.official"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FontAwesomeIcon
-            icon={faFacebook}
-            className="social-icon facebook-icon"
-          />
-        </a>
-        <a
-          href="https://www.twitter.com/_samirkoirala"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FontAwesomeIcon
-            icon={faTwitter}
-            className="social-icon twitter-icon"
-          />
-        </a>
-        <a
-          href="https://www.instagram.com/_samirkoirala"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FontAwesomeIcon
-            icon={faInstagram}
-            className="social-icon instagram-icon"
-          />
-        </a>
-      </div>
+        </section>
 
-      <div className="about-section">
-        <h2>About Me</h2>
-        <p className="textkostyle">
-          I describe myself as an enthusiastic, self-motivated and flexible
-          person. I love doing team works and always ready to explore new
-          things.
-        </p>
-      </div>
+        <section id="contact" className="section contact">
+          <h2>Contact Me</h2>
+          {submitted ? (
+            <p className="success-message">Thank you for your message! I'll get back to you soon.</p>
+          ) : (
+            <form className="contact-form" onSubmit={handleSubmit}>
+              <label htmlFor="name">Name</label>
+              <input type="text" id="name" value={formData.name} onChange={handleChange} required />
 
-      <a className="dnwld button-72" href="myCV.docx" download="cv.docx">
-        Download CV
-      </a>
+              <label htmlFor="email">Email</label>
+              <input type="email" id="email" value={formData.email} onChange={handleChange} required />
+
+              <label htmlFor="message">Message</label>
+              <textarea id="message" value={formData.message} onChange={handleChange} required></textarea>
+
+              <button type="submit">Send</button>
+            </form>
+          )}
+        </section>
+      </main>
+
+      <footer className="footer">
+        <div className="container footer-container">
+          <div className="socials">
+            <a href="https://github.com/samirkoirala" target="_blank" rel="noopener noreferrer">
+              <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" />
+            </a>
+            <a href="https://www.linkedin.com/in/samirkoirala/" target="_blank" rel="noopener noreferrer">
+              <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" />
+            </a>
+            <a href="https://twitter.com/_samirkoieala" target="_blank" rel="noopener noreferrer">
+              <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter" />
+            </a>
+          </div>
+          <p>&copy; {new Date().getFullYear()} Samir Koirala. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 };
